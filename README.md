@@ -31,8 +31,8 @@
 注意一下antifrida
 
 ![file](README/a1b2e5b7f0.jpg)
-![file](https://www.nssctf.cn/files/2024/8/26/afe859286e.jpg)
-![file](https://www.nssctf.cn/files/2024/8/26/77320dc445.jpg)
+![file](README/afe859286e.jpg)
+![file](README/77320dc445.jpg)
 
 ![file](README/ea7bf7bf72.jpg)
 
@@ -139,21 +139,21 @@ setImmediate(hook_RegisterNatives);
 部分手机可能无法运行APP，首先还是注意到Stub类：
 ![file](README/371aa72b6f.jpg)
 可以发现在loadLibrary的时候加入了一个a方法
-![file](https://www.nssctf.cn/files/2024/8/26/d734b2601e.jpg)
+![file](README/d734b2601e.jpg)
 a方法修改真正载入的SO为libezezez83,所以我们对此进行分析
 值得注意的是
 
-![file](https://www.nssctf.cn/files/2024/8/26/91d84bbb32.jpg)
+![file](README/91d84bbb32.jpg)
 这里找到的check是错的，是ezeze而不是ezezez所以考虑动态注册
-![file](https://www.nssctf.cn/files/2024/8/26/b52ca07cf2.jpg)
-![file](https://www.nssctf.cn/files/2024/8/26/c13744550c.jpg)
+![file](README/b52ca07cf2.jpg)
+![file](README/c13744550c.jpg)
 分析动态注册的方法可以发现载入了静态资源路径是file/Data
-![file](https://www.nssctf.cn/files/2024/8/26/0151bcb171.jpg)
-![file](https://www.nssctf.cn/files/2024/8/26/b989dccb6b.jpg)
+![file](README/0151bcb171.jpg)
+![file](README/b989dccb6b.jpg)
 使用loader加载了他
 ![file](README/33745849de.jpg)
 注意loading函数
-![file](https://www.nssctf.cn/files/2024/8/26/5613c413b6.jpg)
+![file](README/5613c413b6.jpg)
 所有字节异或0x5c,这就是对Data的解密操作
 
 ![file](README/744aea3366.jpg)
@@ -162,7 +162,7 @@ a方法修改真正载入的SO为libezezez83,所以我们对此进行分析
 那么我们就需要解密这个so文件了
 之前分析了是0x5c异或，我们异或回去就好了
 弄好之后注意文件头的修复
-![file](https://www.nssctf.cn/files/2024/8/26/b11393861f.jpg)
+![file](README/b11393861f.jpg)
 修复完毕后进行反编译
 ![file](README/9357abb8fa.jpg)
 查看注册的方法
@@ -171,7 +171,7 @@ a方法修改真正载入的SO为libezezez83,所以我们对此进行分析
 ![file](README/7100a63035.jpg)
 看到注册的方法居然是空的，这是为什么呢
 在linker中运行了init段
-![file](https://www.nssctf.cn/files/2024/8/26/309a005fdc.jpg)
+![file](README/309a005fdc.jpg)
 对35820引用就可以发现Gen函数
 ![file](https://www.nssctf.cn/files/2024/8/
 
